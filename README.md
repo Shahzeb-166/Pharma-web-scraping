@@ -68,10 +68,8 @@ Monitors:
 ### Commodity Prices
 Tracks commodity trends including:
 - crude oil
-- wheat
-- rice
-- sugar
-- gold
+- natural resources
+- gold etc.
 - fertilizer-related commodities
 
 ---
