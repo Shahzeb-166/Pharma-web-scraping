@@ -1,0 +1,525 @@
+
+
+/* ── RESET & BASE ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:       #0d1f35;
+  --navy-mid:   #1a3a5c;
+  --blue:       #1e6fa8;
+  --blue-lt:    #3b9ad9;
+  --sky:        #e8f4fd;
+  --teal:       #0e8c7a;
+  --gold:       #c49b35;
+  --cream:      #fafaf7;
+  --white:      #ffffff;
+  --ink:        #1a2332;
+  --ink-mid:    #3d5166;
+  --ink-lt:     #6b8299;
+  --border:     #dce6ef;
+  --border-lt:  #eef3f8;
+  --page-w:     780px;
+  --serif:      'Playfair Display', Georgia, serif;
+  --sans:       'DM Sans', Helvetica, sans-serif;
+  --mono:       'DM Mono', monospace;
+}
+
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+
+body {
+  font-family: var(--sans);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: #f0f2f5;
+}
+
+/* ── PAGE SHELL ──────────────────────────────────── */
+.page {
+  width: var(--page-w);
+  margin: 24px auto;
+  background: var(--white);
+  box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+}
+
+@media print {
+  body { background: white; }
+  .page { margin: 0; box-shadow: none; width: 100%; }
+  .page-break { page-break-before: always; }
+}
+
+/* ── PAGE HEADER BAND ───────────────────────────── */
+.pg-header {
+  background: var(--navy);
+  padding: 28px 36px 22px;
+  position: relative;
+  overflow: hidden;
+}
+.pg-header::before {
+  content: '';
+  position: absolute;
+  right: -40px; top: -40px;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  background: rgba(30,111,168,0.18);
+}
+.pg-header::after {
+  content: '';
+  position: absolute;
+  right: 60px; top: 30px;
+  width: 90px; height: 90px;
+  border-radius: 50%;
+  background: rgba(30,111,168,0.12);
+}
+.pg-header-inner { position: relative; z-index: 1; display: flex; align-items: flex-end; justify-content: space-between; }
+.pg-header h1 {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--white);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+.pg-header .sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.55);
+  font-weight: 300;
+  margin-top: 4px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+.pg-header .badge-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 3px 10px;
+  font-size: 9.5px;
+  color: rgba(255,255,255,0.75);
+  letter-spacing: 0.3px;
+}
+.badge .dot {
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: #4ade80;
+  flex-shrink: 0;
+}
+.pg-header-meta {
+  text-align: right;
+  flex-shrink: 0;
+}
+.pg-header-meta .updated-label {
+  font-size: 9px;
+  color: rgba(255,255,255,0.40);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+.pg-header-meta .updated-val {
+  font-size: 12px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.85);
+  margin-top: 2px;
+}
+.pg-header-meta .page-num {
+  font-size: 9px;
+  color: rgba(255,255,255,0.30);
+  margin-top: 6px;
+}
+
+/* accent rule under header */
+.accent-rule {
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue) 0%, var(--teal) 60%, transparent 100%);
+}
+
+/* ── CONTENT WRAPPER ────────────────────────────── */
+.content { padding: 24px 36px 32px; }
+
+/* ── SECTION LABEL ──────────────────────────────── */
+.sec-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.sec-label::before {
+  content: '';
+  display: block;
+  width: 3px;
+  height: 16px;
+  border-radius: 2px;
+  background: var(--blue);
+  flex-shrink: 0;
+}
+.sec-label h2 {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.1px;
+}
+.sec-label.teal::before { background: var(--teal); }
+.sec-label.gold::before { background: var(--gold); }
+
+/* ── SECTION DIVIDER ────────────────────────────── */
+.sec-divider {
+  border: none;
+  border-top: 1px solid var(--border-lt);
+  margin: 18px 0;
+}
+
+/* ── TWO-COL GRID ───────────────────────────────── */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.span-2 { grid-column: span 2; }
+
+/* ── CARD ───────────────────────────────────────── */
+.card {
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  background: var(--white);
+}
+.card-head {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--ink-lt);
+  margin-bottom: 8px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-lt);
+}
+
+/* ── WEATHER ─────────────────────────────────────── */
+/* Layout: today card left, week cards right */
+.weather-wrap {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+  gap: 12px;
+  margin-bottom: 18px;
+  align-items: stretch;
+}
+
+/* ---- Today card: wraps .weather-widget from render_today_weather_widget() ---- */
+.weather-today {
+  background: linear-gradient(145deg, var(--navy-mid), var(--navy));
+  border-radius: 8px;
+  padding: 16px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 120px;
+}
+.weather-today .city {
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255,255,255,0.50);
+  margin-bottom: 8px;
+}
+/* .weather-widget is the direct output of render_today_weather_widget() */
+.weather-widget {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  height: 100%;
+  justify-content: space-between;
+}
+.weather-widget .temp {
+  font-family: var(--serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.weather-widget .temp .range {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.55);
+}
+.weather-widget .meta {
+  font-size: 10.5px;
+  color: rgba(255,255,255,0.65);
+  line-height: 1.6;
+}
+
+/* ---- Week strip: wraps .weather-week-cards from render_week_weather_cards() ---- */
+.weather-week {
+  display: flex;
+  align-items: stretch;
+}
+/* .weather-week-cards is the direct output of render_week_weather_cards() */
+.weather-week-cards {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  width: 100%;
+  align-items: stretch;
+}
+/* .weather-day-card is each day div from render_week_weather_cards() */
+.weather-day-card {
+  background: var(--cream);
+  border: 1px solid var(--border-lt);
+  border-radius: 8px;
+  text-align: center;
+  padding: 9px 4px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+/* First card = today, highlighted */
+.weather-day-card:first-child {
+  background: var(--navy);
+  border-color: var(--navy);
+}
+.weather-day-card .day {
+  font-size: 8.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--ink-lt);
+  margin-bottom: 1px;
+}
+.weather-day-card:first-child .day {
+  color: rgba(255,255,255,0.50);
+}
+.weather-day-card .temp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  margin: 2px 0;
+}
+.weather-day-card .max {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+}
+.weather-day-card:first-child .max {
+  color: #ffffff;
+}
+.weather-day-card .min {
+  font-size: 10px;
+  color: var(--ink-lt);
+  line-height: 1.1;
+}
+.weather-day-card:first-child .min {
+  color: rgba(255,255,255,0.45);
+}
+.weather-day-card .precip {
+  font-size: 9px;
+  color: var(--blue-lt);
+  margin-top: 2px;
+}
+.weather-day-card:first-child .precip {
+  color: rgba(255,255,255,0.50);
+}
+
+/* ── AI SUMMARY BOX ─────────────────────────────── */
+.ai-box {
+  background: var(--sky);
+  border: 1px solid #c5def2;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 6px 6px 0;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+.ai-box.teal-box {
+  background: #e6f5f2;
+  border-color: #a8ddd6;
+  border-left-color: var(--teal);
+}
+.ai-box.gold-box {
+  background: #fdf8ee;
+  border-color: #e8d8a0;
+  border-left-color: var(--gold);
+}
+.ai-box-label {
+  font-size: 8.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--blue);
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.ai-box.teal-box .ai-box-label { color: var(--teal); }
+.ai-box.gold-box .ai-box-label { color: #9a7020; }
+.ai-box-label::before {
+  content: '◆';
+  font-size: 7px;
+}
+.ai-box p {
+  font-size: 11px;
+  line-height: 1.65;
+  color: var(--ink-mid);
+}
+
+/* ── TABLES ─────────────────────────────────────── */
+table { width: 100%; border-collapse: collapse; font-size: 10.5px; }
+thead tr th {
+  background: var(--navy);
+  color: rgba(255,255,255,0.90);
+  font-weight: 500;
+  font-size: 9.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 6px 8px;
+  text-align: left;
+}
+thead tr th:first-child { border-radius: 4px 0 0 0; }
+thead tr th:last-child  { border-radius: 0 4px 0 0; }
+tbody tr td {
+  padding: 5px 8px;
+  border-bottom: 1px solid var(--border-lt);
+  color: var(--ink);
+  vertical-align: top;
+}
+tbody tr:last-child td { border-bottom: none; }
+tbody tr:nth-child(even) td { background: var(--cream); }
+.num { text-align: right; font-family: var(--mono); font-size: 10px; }
+.up   { color: #1a7c4e; font-weight: 500; }
+.down { color: #b03030; font-weight: 500; }
+.tag  {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 20px;
+  font-size: 8.5px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+.tag-blue  { background: var(--sky); color: var(--blue); }
+.tag-green { background: #e6f5ee; color: #1a7c4e; }
+.tag-red   { background: #fdecea; color: #b03030; }
+.tag-gold  { background: #fdf3dc; color: #9a7020; }
+
+/* ── DRAP / LIST ────────────────────────────────── */
+.reg-list { list-style: none; }
+.reg-list li {
+  padding: 7px 0;
+  border-bottom: 1px solid var(--border-lt);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.reg-list li:last-child { border-bottom: none; }
+.reg-list .ri-date {
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--ink-lt);
+  white-space: nowrap;
+  padding-top: 1px;
+  min-width: 60px;
+}
+.reg-list .ri-text { font-size: 10.5px; color: var(--ink-mid); line-height: 1.5; }
+.reg-list .ri-text strong { color: var(--ink); font-weight: 600; }
+
+/* ── CHART CONTAINER ────────────────────────────── */
+.chart-wrap {
+  width: 100%;
+  min-height: 140px;
+  border: 1px dashed var(--border);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-lt);
+  font-size: 10px;
+  background: var(--cream);
+}
+
+/* ── SOURCE FOOTER ──────────────────────────────── */
+.source-note {
+  font-size: 9px;
+  color: var(--ink-lt);
+  margin-top: 5px;
+  font-style: italic;
+}
+
+/* ── PAGE FOOTER ─────────────────────────────────── */
+.pg-footer {
+  background: var(--navy);
+  padding: 8px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.pg-footer span {
+  font-size: 9px;
+  color: rgba(255,255,255,0.35);
+  letter-spacing: 0.4px;
+}
+
+/* ── PAGE BREAK ─────────────────────────────────── */
+.page-break {
+  border: none;
+  margin: 0;
+  padding: 0;
+  page-break-before: always;
+}
+
+/* ── REFERENCES ─────────────────────────────────── */
+.ref-list { list-style: none; counter-reset: ref-counter; }
+.ref-list li {
+  counter-increment: ref-counter;
+  padding: 5px 0 5px 28px;
+  border-bottom: 1px solid var(--border-lt);
+  position: relative;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--ink-mid);
+}
+.ref-list li::before {
+  content: counter(ref-counter);
+  position: absolute;
+  left: 0;
+  top: 6px;
+  font-family: var(--mono);
+  font-size: 9px;
+  color: var(--blue);
+  font-weight: 600;
+  min-width: 18px;
+}
+.ref-list li a { color: var(--blue); text-decoration: none; }
+.ref-list li a:hover { text-decoration: underline; }
+.ref-category {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  margin: 14px 0 6px;
+}
+
+/* ── INLINE META PILL ───────────────────────────── */
+.meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: var(--sky);
+  border: 1px solid #c5def2;
+  border-radius: 20px;
+  padding: 2px 9px;
+  font-size: 9px;
+  color: var(--blue);
+}

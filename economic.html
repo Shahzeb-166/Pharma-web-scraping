@@ -1,0 +1,229 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pharma Intelligence Weekly Report</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/theme.css" />
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1  — Summary & Weather & AI Insights
+     ══════════════════════════════════════════ -->
+<div class="page">
+
+  <!-- HEADER -->
+  <header class="pg-header">
+    <div class="pg-header-inner">
+      <div>
+        <h1>Pharma Intelligence<br>Weekly Report</h1>
+        <p class="sub">Economic · Technology · Pharmaceutical</p>
+        <div class="badge-row">
+          <span class="badge"><span class="dot"></span> Pakistan & Global</span>
+          <span class="badge">Karachi HQ</span>
+          <span class="badge">AI-Summarised</span>
+        </div>
+      </div>
+      <div class="pg-header-meta">
+        <div class="updated-label">Data last updated</div>
+        <div class="updated-val">{{ generated_at }}</div>
+        <div class="page-num">Page 1 of 3</div>
+      </div>
+    </div>
+  </header>
+  <div class="accent-rule"></div>
+
+  <div class="content">
+
+    <!-- WEATHER -->
+    <div class="sec-label">
+      <h2>Weather Overview — Karachi</h2>
+    </div>
+
+    <div class="weather-wrap">
+      <!-- today card: render_today_weather_widget() output goes here -->
+      <div class="weather-today">
+        <div class="city">Karachi, Pakistan — Today</div>
+        {{ today_weather }}
+      </div>
+
+      <!-- week strip: render_week_weather_cards() output goes here -->
+      <div class="weather-week">
+        {{ week_weather }}
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- ECONOMIC AI SUMMARY -->
+    <div class="sec-label">
+      <h2>Economic AI Summary</h2>
+    </div>
+    <div class="ai-box">
+      <div class="ai-box-label">AI-Generated Summary · Economics</div>
+      {{ economic_ai_summary }}
+    </div>
+
+    <!-- GLOBAL DEVELOPMENTS AI SUMMARY -->
+    <div class="sec-label">
+      <h2>Global Economic Developments</h2>
+    </div>
+    <div class="ai-box">
+      <div class="ai-box-label">AI-Generated Summary · Global Markets</div>
+      {{ global_ai_summary }}
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- PHARMACEUTICAL SUMMARIES -->
+    <div class="sec-label teal">
+      <h2>Pharmaceutical & Technology Intelligence</h2>
+    </div>
+
+    <div class="grid-2" style="gap:12px; margin-bottom:12px;">
+      <div class="ai-box teal-box" style="margin-bottom:0;">
+        <div class="ai-box-label">AI Summary · Pharma Technology Trends</div>
+        {{ tech_ai_summary }}
+      </div>
+      <div class="ai-box teal-box" style="margin-bottom:0;">
+        <div class="ai-box-label">AI Summary · Disease & Research</div>
+        {{ disease_ai_summary }}
+      </div>
+    </div>
+
+    <div class="ai-box gold-box">
+      <div class="ai-box-label">AI Summary · Advanced Biomedical Research</div>
+      {{ research_ai_summary }}
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- DRAP UPDATES -->
+    <div class="sec-label teal">
+      <h2>DRAP Regulatory Updates</h2>
+    </div>
+    <div class="card" style="margin-bottom:6px;">
+      {{ drap_updates }}
+    </div>
+    <p class="source-note">Source: {{ drap_source }}</p>
+
+  </div><!-- /content -->
+
+  <footer class="pg-footer">
+    <span>CONFIDENTIAL — For internal management use only</span>
+    <span>Pharma Intelligence Weekly · {{ generated_at }}</span>
+  </footer>
+
+</div><!-- /page 1 -->
+
+
+<!-- ══════════════════════════════════════════
+     PAGE 2  — Charts, Tables & Data
+     ══════════════════════════════════════════ -->
+<div class="page" style="margin-top: 24px;">
+
+  <!-- HEADER (compact repeat) -->
+  <header class="pg-header">
+    <div class="pg-header-inner">
+      <div>
+        <h1>Market Data & Analytics</h1>
+        <p class="sub">Forex · Fuel · Commodities · Pharma</p>
+      </div>
+      <div class="pg-header-meta">
+        <div class="updated-label">Data last updated</div>
+        <div class="updated-val">{{ generated_at }}</div>
+        <div class="page-num">Page 2 of 3</div>
+      </div>
+    </div>
+  </header>
+  <div class="accent-rule"></div>
+
+  <div class="content">
+
+    <!-- FOREX -->
+    <div class="sec-label">
+      <h2>Foreign Exchange</h2>
+    </div>
+    <div class="grid-2" style="margin-bottom:18px;">
+      <div class="card">
+        <div class="card-head">Exchange Rates</div>
+        {{ forex_table }}
+      </div>
+      <div class="card" style="display:flex; align-items:center; justify-content:center;">
+        {{ forex_chart }}
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- FUEL -->
+    <div class="sec-label">
+      <h2>Fuel Prices</h2>
+    </div>
+    <div class="grid-2" style="margin-bottom:18px;">
+      <div class="card">
+        <div class="card-head">Current Prices (PKR/Litre)</div>
+        {{ fuel_table }}
+      </div>
+      <div class="card" style="display:flex; align-items:center; justify-content:center;">
+        {{ fuel_chart }}
+      </div>
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- COMMODITIES -->
+    <div class="sec-label">
+      <h2>Global Commodities</h2>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-head">Commodity Prices — International Markets</div>
+      {{ commodities_table }}
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- CORPORATE TAX -->
+    <div class="sec-label">
+      <h2>Corporate Tax Reference</h2>
+    </div>
+    <div class="card" style="margin-bottom:18px;">
+      <div class="card-head">Tax Rates — Key Markets (PwC Data)</div>
+      {{ pwc_tax_table }}
+    </div>
+
+    <hr class="sec-divider">
+
+    <!-- TOP SELLING DRUGS -->
+    <div class="sec-label teal">
+      <h2>Top Selling Drugs — FY2025</h2>
+    </div>
+    <div class="card">
+      <div class="card-head">Sales Performance by Product</div>
+      {{ top_drugs_table }}
+    </div>
+
+  </div><!-- /content -->
+
+  <footer class="pg-footer">
+    <span>CONFIDENTIAL — For internal management use only</span>
+    <span>Pharma Intelligence Weekly · {{ generated_at }}</span>
+  </footer>
+
+</div><!-- /page 2 -->
+
+
+  <footer class="pg-footer">
+    <span>CONFIDENTIAL — For internal management use only</span>
+    <span>Pharma Intelligence Weekly · {{ generated_at }}</span>
+  </footer>
+
+</div><!-- /page 3 -->
+
+</body>
+</html>
+
